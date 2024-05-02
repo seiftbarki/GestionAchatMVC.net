@@ -1,0 +1,157 @@
+﻿@* @model Application.Models.Article
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <style>
+        /* Ajoutez vos styles CSS ici */
+        .row {
+            margin-bottom: 20px;
+        }
+
+        .col-sm-2 {
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        .col-sm-10 {
+            margin-top: 5px;
+        }
+
+        .action-link {
+            margin-right: 10px;
+            text-decoration: none;
+            color: blue;
+        }
+
+            .action-link:hover {
+                text-decoration: underline;
+            }
+    </style>
+</head>
+
+<h1>Details</h1>
+
+<div>
+    <h4>Article</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Designation)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Designation)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Quantite)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Quantite)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.prix)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.prix)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.taxe)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.taxe)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Decision)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Decision)
+        </dd>
+    </dl>
+</div>
+<div>
+    @if (User.IsInRole("approbateur") || User.IsInRole("admin"))
+    {
+        <a asp-action="Edit" asp-route-id="@Model?.Id" class="action-link">Edit</a>
+    }
+    <a asp-action="Index" class="action-link">Back to List</a>
+</div>
+ *@
+@model Application.Models.Article
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <style>
+        /* Ajoutez vos styles CSS ici */
+        .details-table {
+            width: 70%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+            .details-table th,
+            .details-table td {
+                border: 1px solid #ddd;
+                padding: 8px;
+                text-align: left;
+            }
+
+            .details-table th {
+                background-color: #f2f2f2;
+                font-weight: bold;
+            }
+
+        .action-link {
+            margin-right: 10px;
+            text-decoration: none;
+            color: blue;
+        }
+
+            .action-link:hover {
+                text-decoration: underline;
+            }
+    </style>
+</head>
+
+<h1>Details</h1>
+
+<div>
+    <h4>Article</h4>
+    <hr />
+    <table class="details-table">
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Designation)</th>
+            <td>@Html.DisplayFor(model => model.Designation)</td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Quantite)</th>
+            <td>@Html.DisplayFor(model => model.Quantite)</td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.prix)</th>
+            <td>@Html.DisplayFor(model => model.prix)</td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.taxe)</th>
+            <td>@Html.DisplayFor(model => model.taxe)</td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Decision)</th>
+            <td>@Html.DisplayFor(model => model.Decision)</td>
+        </tr>
+    </table>
+</div>
+
+<div>
+    @if (User.IsInRole("approbateur") || User.IsInRole("admin"))
+    {
+        <a asp-action="Edit" asp-route-id="@Model?.Id" class="action-link">Edit</a>
+    }
+    <a asp-action="Index" class="action-link">Back to List</a>
+</div>

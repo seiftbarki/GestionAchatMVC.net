@@ -1,0 +1,107 @@
+﻿@model IEnumerable<Application.Models.Article>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <style>
+        /* Styles pour la table */
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .table th,
+        .table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .table th {
+            background-color: #f2f2f2;
+        }
+
+        .table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        /* Styles pour les liens */
+        .action-link {
+            color: blue;
+            text-decoration: none;
+            margin-right: 5px;
+        }
+
+        .action-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<h1>Index</h1>
+
+@if (User.IsInRole("acheteur") || User.IsInRole("admin"))
+{
+    <p>
+        <a asp-action="Create" class="action-link">Create New</a>
+    </p>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Designation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantite)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.prix)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.taxe)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Decision)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Designation)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantite)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.prix)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.taxe)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Decision)
+                </td>
+                <td>
+                    @if (User.IsInRole("approbateur") || User.IsInRole("admin"))
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="action-link">Edit</a>
+                    }
+                    <a asp-action="Details" asp-route-id="@item.Id" class="action-link">Details</a>
+                    @if (User.IsInRole("approbateur") || User.IsInRole("admin"))
+                    {
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="action-link">Delete</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
